@@ -61,12 +61,13 @@ def wrangle_telco():
     """
     query = """
             SELECT 
-                customer_id, 
-                monthly_charges, 
-                tenure, 
+                customer_id,
+                monthly_charges,
+                tenure,
                 total_charges
             FROM customers
-            WHERE contract_type_id = 3;
+            JOIN contract_types USING(contract_type_id)
+            WHERE contract_type = 'Two year';
             """
     df = get_data_from_sql('telco_churn', query)
     
